@@ -1,4 +1,179 @@
-.container {
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
 }
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* My CSS */
+:root {
+	--background-content: #ebebed;
+	--background-playlists: white;
+	--font-color: #75767e;
+	--font-color-pop: #3dc2a3f8;
+	--font-color-highlight: white;
+	--hightlight: #31233c;
+	--highlight-dark: #dd7755;
+}
+
+body {
+	font-family: 'Montserrat', sans-serif;
+	color: var(--font-color);
+}
+
+h1{
+	font-weight: 300;
+	text-transform: uppercase;
+	color: var(--font-color-pop);
+}
+
+nav a {
+	text-decoration: none;
+	background-color: var(--hightlight);
+	color: var(--font-color-highlight);
+	padding: 0.5em 1em;
+	border-radius: 20px;
+	font-weight: 600;
+	transition: all .2s ease-in-out;
+}
+
+nav a:hover {
+	background-color: var(--highlight-dark);
+}
+
+.container {
+	display: flex;
+	height: 100vh;
+	justify-content: flex-start;
+}
+
+.playlist-nav {
+	background-color: var(--background-playlists);
+	flex: 1;
+	font-weight: 700;
+	padding: 2em;
+	box-shadow: 10px 0 10px rgba(200, 200, 200, 0.4);
+	order: 0;
+	z-index: 3;
+}
+
+.playlist-nav h1 {
+	padding: 0.5em 0.3em;
+	letter-spacing: 0.1em;
+}
+
+.playlist-nav li {
+	padding: 0.5em;
+	border-radius: 0 30px 30px 0;
+	line-height: 1.5em;
+	font-size: 0.8em;
+	color: rgb(165, 162, 162);
+}
+
+.playlist-nav li:hover {
+	background-color: var(--hightlight);
+	cursor: pointer;
+	color: var(--font-color-highlight);
+	box-shadow: 10px 10px 15px rgba(175, 175, 175, 0.4);
+}
+
+.content {
+	padding: 2.5em;
+	background-color: var(--background-content);
+	flex: 6;
+	display: flex;
+	flex-direction: column;
+	min-height: 0; /* For firefox */
+}
+
+.main-nav {
+	display: flex;
+	justify-content: space-between;
+}
+
+.logo {
+	font-family: 'Ultra', serif;
+	color: var(--hightlight);
+}
+
+.tracks {
+	flex-grow: 1;
+	overflow: auto;
+	min-height: 0; /* For firefox */
+}
+
+.head {
+	text-transform: uppercase;
+}
+.row, .head {
+	margin: 1em 1em 1em 0;
+	padding: 0.5em 2em;
+	display: flex;
+	align-items: center;
+
+}
+
+.row {
+	border-radius: 10px;
+	background-color: var(--background-playlists);
+	box-shadow: 10px 10px 15px rgba(175, 175, 175, 0.4);
+}
+
+.row > *, .head > * {
+	flex: 1;
+	padding-right: 0.5em;
+	line-height: 1.5em;
+}
+
+.row .bigger, .head .bigger {
+	flex: 3;
+}
+
+.row .bigger {
+	font-weight: 600;
+}
+
+.title {
+	color: var(--font-color-pop);
+}
+
+
+
+

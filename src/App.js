@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import { Credentials } from "./components/Credentials";
+import Nav from "./components/Nav";
 import Playlists from "./components/Playlists";
+import TableHead from "./components/TableHead";
 import Tracks from "./components/Tracks";
-import Track from "./components/Track";
 import axios from "axios";
 
 // Hash from url after logged in
@@ -26,9 +27,12 @@ const App = () => {
 	const spotify = Credentials();
 
 	const [token, setToken] = useState("");
-	const [playlist, setPlaylist] = useState({ selectedPlaylist: "", listOfPlaylistFromAPI: [] });
-	const [tracks, setTracks] = useState({ selectedTrack: "", listOfTracksFromAPI: [] });
-	const [trackDetail, setTrackDetail] = useState(null);
+	const [playlists, setPlaylists] = useState([]);
+	const [tracks, setTracks] = useState([]);
+	const [trackIds, setTrackIds] = useState([]);
+	const [audioFeatures, setAudioFeatures] = useState([]);
+	const [tracksWithAudioFeatures, setTracksWithAudioFeatures] = useState([]);
+
 
 	useEffect(() => {
 		setToken(hash.access_token);
@@ -41,10 +45,7 @@ const App = () => {
 				headers: { 'Authorization': 'Bearer ' + token}
 			})
 			.then(userDataResponse => {
-				setPlaylist({
-					selectedPlaylist: "",
-					listOfPlaylistFromAPI: userDataResponse.data.items
-				});
+				setPlaylists(userDataResponse.data.items);
 			})
 			.catch(error => {
 				console.log(error);
@@ -52,83 +53,80 @@ const App = () => {
 		}
 	}, [token]);
 
-	const playlistClicked = (event) => {
-		setPlaylist({
-			selectedPlaylist: event.target.id,
-			listOfPlaylistFromAPI: playlist.listOfPlaylistFromAPI
-		})
+	useEffect(() => {
+		requestAudioFeatures();
+	}, [trackIds]);
 
+	useEffect(() => {
+		mergeTracksWithAudioFeatures();
+	}, [audioFeatures]);
+
+	const onPlaylistClicked = (event) => {
 		// Get tracks
 		axios(`https://api.spotify.com/v1/playlists/${event.target.id}/tracks`, {
 			method: 'GET',
 			headers: { 'Authorization': 'Bearer ' + token }
 		})
 		.then(tracksResponse => {
-			//console.log(tracksResponse);
-			setTracks({
-				selectedTrack: tracks.selectedTrack,
-				listOfTracksFromAPI: tracksResponse.data.items
+			let trackInfos = [];
+			let trackIds = [];
+
+			tracksResponse.data.items.forEach(item => {
+				trackInfos.push(item.track);
+				trackIds.push(item.track.id);
 			})
+			setTracks(trackInfos);
+			setTrackIds(trackIds);
 		})
-		.catch((error) => {
-			console.log(error);
-		})
-		// Get audio features for all tracks
+		.catch(error => console.log(error));
 	}
 
-	
-
-
-	const trackClicked = (event) => {
-		setTracks({
-			selectedTrack: event.target.id,
-			listOfTracksFromAPI: tracks.listOfTracksFromAPI
-		})
-
-		axios(`https://api.spotify.com/v1/audio-features/${event.target.id}`, {
-			method: "GET",
-			headers: { "Authorization": "Bearer " + token }
-		})
-		.then(audioFeaturesResponse => {
-			setTrackDetail(audioFeaturesResponse.data);
-		})
-		.catch(error => {
-			console.log(error);
-		})
+	const requestAudioFeatures = async () => {
+		if (Array.isArray(trackIds) && trackIds.length > 0) {
+			axios(`https://api.spotify.com/v1/audio-features/?ids=${trackIds.toString()}`, {
+				method: "GET",
+				headers: { "Authorization": "Bearer " + token }
+			})
+			.then(audioFeaturesResponse => {
+				setAudioFeatures(audioFeaturesResponse.data.audio_features);
+			})
+		}
 	}
 
-	const getTracks = () => {
-		console.log(tracks.listOfTracksFromAPI);
+	const mergeTracksWithAudioFeatures = () => {
+		if (tracks.length === audioFeatures.length) {
+			setTracksWithAudioFeatures(mergeArrays(tracks, audioFeatures));
+		}
 	}
 
-	const getAudioFeatures = () => {
-		console.log(trackDetail);
+	// Helper function
+	const mergeArrays = (array1, array2) => {
+		let mergedArray = [];
+
+		array1.forEach((item, index) => {
+			if (item.id === array2[index].id){
+				mergedArray.push({...item, ...array2[index]});
+			}
+		})
+		return mergedArray; 
 	}
 
 	return (
-		<div>
-			{
-				token 
-					? <a href="https://accounts.spotify.com/en/logout">Logout</a>
-					: <a href={`https://accounts.spotify.com/authorize?client_id=${spotify.ClientId}&redirect_uri=${spotify.RedirectURI}&response_type=token&scope=${spotify.Scopes.join("%20")}`}>
-						Login to Spotify
-					  </a>
-			}	
-			<button onClick={getTracks}>Get Tracks</button>
-			<button onClick={getAudioFeatures}>Get Audio Features</button>	
-			<div className="container">
+		<div className="container">
+			<div className="box playlist-nav">
 				<Playlists 
-					playlists={playlist.listOfPlaylistFromAPI}
-					clicked={playlistClicked}
+					playlists={playlists}
+					clicked={onPlaylistClicked}
+					token={token}
+					spotify={spotify}
 				/>
-
+			</div>
+		
+			<div className="box content">
+				<Nav spotify={spotify} token={token} />
+				<TableHead />
 				<Tracks 
-					tracks={tracks.listOfTracksFromAPI}
-					clicked={trackClicked}
-				/>
-
-				<Track 
-					details={trackDetail} 
+					tracks={tracksWithAudioFeatures}
 				/>
 			</div>
 		</div>
@@ -136,3 +134,17 @@ const App = () => {
 }
 
 export default App;
+
+/* 
+To Do:
+- Only let 1 player play simultanously
+- Fixed table header and let it be directly over the correct columns
+- Get more than 100 songs
+- Add loading when clicked
+- Highlight current playlist
+
+More difficult:
+- Sort items on click at table header
+- Add button to sort lists in a wavy order (bpm + valence/energy)
+- Save playlists in account
+*/

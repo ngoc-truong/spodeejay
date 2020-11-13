@@ -2,21 +2,25 @@ import React from "react";
 
 const Playlists = ({ playlists, clicked }) => {
 	return (
-		<ul>
-		{ 
-			playlists.map((playlist, idx) => {
-				return (
-					<li key={idx + 1}>
-						<button 
+		<div>
+			<h1>Playlists</h1>
+			<ul>
+			{ 
+				playlists.map((playlist, idx) => {
+					return (
+						<li 
+							key={idx + 1}
 							id={playlist.id}
-							onClick={clicked}>
+							onClick={clicked}
+						>
 							{playlist.name}
-						</button>
-					</li>
-				)
-			})
-		}
-		</ul>
+						</li>
+					)
+				})
+			}
+			</ul>	
+		</div>
+		
 	)
 }
 export default Playlists;
