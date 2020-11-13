@@ -25,14 +25,13 @@ window.location.hash = "";
 // App component
 const App = () => {
 	const spotify = Credentials();
-
 	const [token, setToken] = useState("");
 	const [playlists, setPlaylists] = useState([]);
+	const [chosenPlaylist, setChosenPlaylist] = useState("");
 	const [tracks, setTracks] = useState([]);
 	const [trackIds, setTrackIds] = useState([]);
 	const [audioFeatures, setAudioFeatures] = useState([]);
 	const [tracksWithAudioFeatures, setTracksWithAudioFeatures] = useState([]);
-
 
 	useEffect(() => {
 		setToken(hash.access_token);
@@ -61,8 +60,21 @@ const App = () => {
 		mergeTracksWithAudioFeatures();
 	}, [audioFeatures]);
 
+	useEffect(() => {
+		window.addEventListener("play", (event) => {
+			if(window.$_currentlyPlaying && window.$_currentlyPlaying !== event.target)
+			{
+				window.$_currentlyPlaying.pause();
+			} 
+			window.$_currentlyPlaying = event.target;
+		}, true);
+
+	}, [tracksWithAudioFeatures]);
+
+
 	const onPlaylistClicked = (event) => {
-		// Get tracks
+		setChosenPlaylist(event.target.id);
+		// Get tracks of playlist
 		axios(`https://api.spotify.com/v1/playlists/${event.target.id}/tracks`, {
 			method: 'GET',
 			headers: { 'Authorization': 'Bearer ' + token }
@@ -116,9 +128,8 @@ const App = () => {
 			<div className="box playlist-nav">
 				<Playlists 
 					playlists={playlists}
+					chosenPlaylist={chosenPlaylist}
 					clicked={onPlaylistClicked}
-					token={token}
-					spotify={spotify}
 				/>
 			</div>
 		
@@ -137,11 +148,9 @@ export default App;
 
 /* 
 To Do:
-- Only let 1 player play simultanously
 - Fixed table header and let it be directly over the correct columns
 - Get more than 100 songs
 - Add loading when clicked
-- Highlight current playlist
 
 More difficult:
 - Sort items on click at table header

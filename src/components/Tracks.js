@@ -12,7 +12,7 @@ const Tracks = ({ tracks }) => {
 		<div className="tracks">
 			{ tracks.map((track, idx) => {
 				return (
-					<div className="row"> 
+					<div key={idx} className="row"> 
 						<div className="bigger title">{track.name}</div>
 						<div className="bigger artist">{track.artists[0].name}</div>
 						<div>{msToMinAndSec(track.duration_ms)}</div>

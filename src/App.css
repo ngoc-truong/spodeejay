@@ -107,7 +107,11 @@ nav a:hover {
 	color: rgb(165, 162, 162);
 }
 
-.playlist-nav li:hover {
+.highlighted {
+	color: var(--font-color-highlight) !important;
+}
+
+.playlist-nav li:hover, .highlighted {
 	background-color: var(--hightlight);
 	cursor: pointer;
 	color: var(--font-color-highlight);
