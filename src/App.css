@@ -109,9 +109,12 @@ nav a:hover {
 
 .highlighted {
 	color: var(--font-color-highlight) !important;
+	background-color: var(--font-color-pop);
+	box-shadow: 10px 10px 15px rgba(175, 175, 175, 0.4);
+	cursor: pointer;
 }
 
-.playlist-nav li:hover, .highlighted {
+.playlist-nav li:hover {
 	background-color: var(--hightlight);
 	cursor: pointer;
 	color: var(--font-color-highlight);

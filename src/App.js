@@ -61,14 +61,7 @@ const App = () => {
 	}, [audioFeatures]);
 
 	useEffect(() => {
-		window.addEventListener("play", (event) => {
-			if(window.$_currentlyPlaying && window.$_currentlyPlaying !== event.target)
-			{
-				window.$_currentlyPlaying.pause();
-			} 
-			window.$_currentlyPlaying = event.target;
-		}, true);
-
+		playOnlyOneAudio();
 	}, [tracksWithAudioFeatures]);
 
 
@@ -109,6 +102,16 @@ const App = () => {
 		if (tracks.length === audioFeatures.length) {
 			setTracksWithAudioFeatures(mergeArrays(tracks, audioFeatures));
 		}
+	}
+
+	const playOnlyOneAudio = () => {
+		window.addEventListener("play", (event) => {
+			if(window.$_currentlyPlaying && window.$_currentlyPlaying !== event.target)
+			{
+				window.$_currentlyPlaying.pause();
+			} 
+			window.$_currentlyPlaying = event.target;
+		}, true);
 	}
 
 	// Helper function
@@ -156,4 +159,5 @@ More difficult:
 - Sort items on click at table header
 - Add button to sort lists in a wavy order (bpm + valence/energy)
 - Save playlists in account
+- User is able to correct BPM number
 */
