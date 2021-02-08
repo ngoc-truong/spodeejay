@@ -51,6 +51,7 @@ table {
 	--font-color-highlight: white;
 	--hightlight: #31233c;
 	--highlight-dark: #dd7755;
+	--table-divide: #e5e6ec;
 }
 
 body {
@@ -146,39 +147,40 @@ nav a:hover {
 	min-height: 0; /* For firefox */
 }
 
-.head {
-	text-transform: uppercase;
-}
-.row, .head {
-	margin: 1em 1em 1em 0;
-	padding: 0.5em 2em;
-	display: flex;
-	align-items: center;
-
+table {
+	width: 100%;
+	margin: 2em 0;
+	border-collapse: collapse;
 }
 
-.row {
-	border-radius: 10px;
+thead {
+	text-align: left;
+}
+
+tbody {
 	background-color: var(--background-playlists);
 	box-shadow: 10px 10px 15px rgba(175, 175, 175, 0.4);
+	border-radius: 15px;
 }
 
-.row > *, .head > * {
-	flex: 1;
-	padding-right: 0.5em;
-	line-height: 1.5em;
+tr {
+	border-bottom: 2px var(--table-divide) solid;
 }
 
-.row .bigger, .head .bigger {
-	flex: 3;
+tr td {
+	vertical-align: middle;
 }
 
-.row .bigger {
-	font-weight: 600;
+td, th {
+	padding: 0.7em;
 }
 
+.number {
+	text-align: right;
+}
 .title {
 	color: var(--font-color-pop);
+	font-weight: 600;
 }
 
 

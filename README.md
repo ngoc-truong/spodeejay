@@ -4,4 +4,3 @@ Spodeejay is an app to sort your music from Spotify. With Spodeejay you can sort
 threshold value entered by the user. Therefore the speed will change slowly until it reaches the threshold.
 
 This is especially useful to get faster (or slower) step by step in your playlist. 
-

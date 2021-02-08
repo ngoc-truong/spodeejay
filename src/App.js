@@ -3,8 +3,7 @@ import './App.css';
 import { Credentials } from "./components/Credentials";
 import Nav from "./components/Nav";
 import Playlists from "./components/Playlists";
-import TableHead from "./components/TableHead";
-import Tracks from "./components/Tracks";
+import TracksTable from "./components/TracksTable";
 import axios from "axios";
 
 // Hash from url after logged in
@@ -138,8 +137,7 @@ const App = () => {
 		
 			<div className="box content">
 				<Nav spotify={spotify} token={token} />
-				<TableHead />
-				<Tracks 
+				<TracksTable 
 					tracks={tracksWithAudioFeatures}
 				/>
 			</div>
