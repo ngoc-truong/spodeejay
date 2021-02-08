@@ -183,6 +183,8 @@ td, th {
 	font-weight: 600;
 }
 
-
-
+.loading-gif {
+	width: 32px;
+	margin: 0 auto;
+}
 

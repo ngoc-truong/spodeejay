@@ -5,6 +5,7 @@ import Nav from "./components/Nav";
 import Playlists from "./components/Playlists";
 import TracksTable from "./components/TracksTable";
 import axios from "axios";
+import loading from "./images/loading.gif";
 
 // Hash from url after logged in
 const hash = window.location.hash
@@ -31,6 +32,7 @@ const App = () => {
 	const [trackIds, setTrackIds] = useState([]);
 	const [audioFeatures, setAudioFeatures] = useState([]);
 	const [tracksWithAudioFeatures, setTracksWithAudioFeatures] = useState([]);
+	const [playlistLoading, setPlaylistLoading] = useState(true);
 
 	useEffect(() => {
 		setToken(hash.access_token);
@@ -65,6 +67,7 @@ const App = () => {
 
 
 	const onPlaylistClicked = (event) => {
+		setPlaylistLoading(true);
 		setChosenPlaylist(event.target.id);
 		// Get tracks of playlist
 		axios(`https://api.spotify.com/v1/playlists/${event.target.id}/tracks`, {
@@ -81,6 +84,7 @@ const App = () => {
 			})
 			setTracks(trackInfos);
 			setTrackIds(trackIds);
+			setPlaylistLoading(false);
 		})
 		.catch(error => console.log(error));
 	}
@@ -137,9 +141,10 @@ const App = () => {
 		
 			<div className="box content">
 				<Nav spotify={spotify} token={token} />
-				<TracksTable 
-					tracks={tracksWithAudioFeatures}
-				/>
+				{ playlistLoading 
+					? <img className="loading-gif" src={loading} alt="Loading playlist..." />
+					: <TracksTable tracks={tracksWithAudioFeatures} />
+				}
 			</div>
 		</div>
 	);
@@ -149,13 +154,12 @@ export default App;
 
 /* 
 To Do:
-- Fixed table header and let it be directly over the correct columns
 - Get more than 100 songs
-- Add loading when clicked
+- Add playlistLoading when clicked
 
 More difficult:
 - Sort items on click at table header
 - Add button to sort lists in a wavy order (bpm + valence/energy)
-- Save playlists in account
+- Save playlists in account/export it to spotify
 - User is able to correct BPM number
 */
