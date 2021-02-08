@@ -1,6 +1,6 @@
 import React from "react";
 
-const TracksTable = ({ tracks }) => {
+const TracksTable = ({ tracksWithAudioFeatures }) => {
 
 	const msToMinAndSec = (ms) => {
 		const minutes = Math.floor(ms / 60000);
@@ -9,7 +9,7 @@ const TracksTable = ({ tracks }) => {
 	}
 
 	return (
-		<table className="tracks">
+		<table className="tracksWithAudioFeatures">
 			<thead>
 				<tr>
 					<th>Title</th>
@@ -23,7 +23,7 @@ const TracksTable = ({ tracks }) => {
 				</tr>
 			</thead>
 			<tbody>
-				{tracks.map((track, idx) => {
+				{tracksWithAudioFeatures.map((track, idx) => {
 					return (
 						<tr key={idx}>
 							<td className="title">{track.name}</td>

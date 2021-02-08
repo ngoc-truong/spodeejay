@@ -1,6 +1,6 @@
 import React from "react";
 
-const Playlists = ({ playlists, chosenPlaylist, clicked}) => {
+const Playlists = ({ playlists, chosenPlaylist, onPlaylistClicked}) => {
 	return (
 		<div>
 			<h1>Playlists</h1>
@@ -13,7 +13,7 @@ const Playlists = ({ playlists, chosenPlaylist, clicked}) => {
 								className="highlighted"
 								key={idx + 1}
 								id={playlist.id}
-								onClick={clicked}
+								onClick={onPlaylistClicked}
 							>
 							{playlist.name}
 						</li>
@@ -23,7 +23,7 @@ const Playlists = ({ playlists, chosenPlaylist, clicked}) => {
 							<li 
 								key={idx + 1}
 								id={playlist.id}
-								onClick={clicked}
+								onClick={onPlaylistClicked}
 							>
 								{playlist.name}
 							</li>

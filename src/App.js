@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import { Credentials } from "./components/Credentials";
-import Nav from "./components/Nav";
-import Playlists from "./components/Playlists";
-import TracksTable from "./components/TracksTable";
-import axios from "axios";
+import Dashboard from "./components/Dashboard";
+import Home from "./components/Home";
 import loading from "./images/loading.gif";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import axios from "axios";
 
 // Hash from url after logged in
 const hash = window.location.hash
@@ -46,6 +46,7 @@ const App = () => {
 			})
 			.then(userDataResponse => {
 				setPlaylists(userDataResponse.data.items);
+				setChosenPlaylist(userDataResponse.data.items[0].id);
 			})
 			.catch(error => {
 				console.log(error);
@@ -68,9 +69,15 @@ const App = () => {
 
 	const onPlaylistClicked = (event) => {
 		setPlaylistLoading(true);
-		setChosenPlaylist(event.target.id);
+		getTracksOfPlaylist(event.target.id);
+		// Bug: Why is no playlist loaded the first time the user logs in?
+	}
+
+	const getTracksOfPlaylist = (playlistId) => {
+		setChosenPlaylist(playlistId);
+
 		// Get tracks of playlist
-		axios(`https://api.spotify.com/v1/playlists/${event.target.id}/tracks`, {
+		axios(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
 			method: 'GET',
 			headers: { 'Authorization': 'Bearer ' + token }
 		})
@@ -130,23 +137,28 @@ const App = () => {
 	}
 
 	return (
-		<div className="container">
-			<div className="box playlist-nav">
-				<Playlists 
-					playlists={playlists}
-					chosenPlaylist={chosenPlaylist}
-					clicked={onPlaylistClicked}
-				/>
-			</div>
-		
-			<div className="box content">
-				<Nav spotify={spotify} token={token} />
-				{ playlistLoading 
-					? <img className="loading-gif" src={loading} alt="Loading playlist..." />
-					: <TracksTable tracks={tracksWithAudioFeatures} />
-				}
-			</div>
-		</div>
+		<Router>
+			<Switch>
+				<Route path="/dashboard">
+					{ token 
+						? <Dashboard 
+							playlists={playlists}
+							chosenPlaylist={chosenPlaylist}
+							onPlaylistClicked={onPlaylistClicked}
+							spotify={spotify}
+							token={token}
+							playlistLoading={playlistLoading}
+							loading={loading}
+							tracksWithAudioFeatures={tracksWithAudioFeatures}
+							/>
+						: <Redirect to="/" />
+					}
+				</Route>
+				<Route exact path="/">
+					{ token ? <Redirect to="/dashboard" /> : <Home spotify={spotify}/>}
+				</Route>
+			</Switch>
+		</Router>
 	);
 }
 
@@ -155,10 +167,14 @@ export default App;
 /* 
 To Do:
 - Get more than 100 songs
-- Add playlistLoading when clicked
+- Fix bug with loading image
+- When logged out, redirect to Homepage (instead of Spotify)
+- Style homepage
+- Add default playlist on dashboard when log in
+- Move individual row (drag), e.g. with Sortable.js
 
 More difficult:
-- Sort items on click at table header
+- // Sort items on click at table header
 - Add button to sort lists in a wavy order (bpm + valence/energy)
 - Save playlists in account/export it to spotify
 - User is able to correct BPM number
