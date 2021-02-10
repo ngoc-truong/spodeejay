@@ -52,17 +52,54 @@ table {
 	--hightlight: #31233c;
 	--highlight-dark: #dd7755;
 	--table-divide: #e5e6ec;
+	--primary-button: #0f65ef;
+}
+
+html {
+	font-family: -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI,
+    Roboto, Helvetica Neue, sans-serif;
 }
 
 body {
-	font-family: 'Montserrat', sans-serif;
 	color: var(--font-color);
 }
 
-h1{
-	font-weight: 300;
-	text-transform: uppercase;
-	color: var(--font-color-pop);
+h1 {
+	font-size: 1.75rem;
+}
+
+h2 {
+	font-size: 1.125rem;
+}
+
+h3 {
+	font-size: 1.125rem;
+}
+
+h4 {
+	font-size: 1rem;
+}
+
+h5 {
+	font-size: 0.875rem;
+}
+
+h6 {
+	font-size: 0.75rem;
+}
+
+.button {
+	text-decoration: none;
+	display: inline-block;
+	padding: .5rem .875rem;
+	font-size: 1rem;
+	line-height: 1.5rem;
+	border-radius: 3px;
+	text-align: center;
+	background-color: var(--primary-button);
+	color: #fff;
+	border: 1px solid transparent;
+	transition: background-color .1s ease 0s !important;
 }
 
 nav a {
@@ -137,7 +174,6 @@ nav a:hover {
 }
 
 .logo {
-	font-family: 'Ultra', serif;
 	color: var(--hightlight);
 }
 
@@ -188,3 +224,8 @@ td, th {
 	margin: 0 auto;
 }
 
+.primary-btn {
+	background-color: var(--primary-btn);
+	padding: 1em;
+	color: var(--font-color);
+}

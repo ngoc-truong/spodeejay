@@ -30,6 +30,7 @@ const Dashboard = ({
                     : <TracksTable tracksWithAudioFeatures={tracksWithAudioFeatures} />
                 }
             </div>
+            {console.log(tracksWithAudioFeatures)}
         </div>
     )
 };

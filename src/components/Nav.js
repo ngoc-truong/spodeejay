@@ -3,7 +3,7 @@ import React from "react";
 const Nav = ({ spotify, token }) => {
 	return (
 		<div className="main-nav">
-			<div className="logo">Spodeejay</div>
+			<div>Spodeejay</div>
 			<nav className="profile">
 				{
 					token 

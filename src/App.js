@@ -172,6 +172,8 @@ To Do:
 - Style homepage
 - Add default playlist on dashboard when log in
 - Move individual row (drag), e.g. with Sortable.js
+- Long lists should scroll in a window (nav should not scroll)
+- Use monospace font for numbers
 
 More difficult:
 - // Sort items on click at table header

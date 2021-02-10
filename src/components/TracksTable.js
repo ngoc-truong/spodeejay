@@ -8,6 +8,14 @@ const TracksTable = ({ tracksWithAudioFeatures }) => {
 		return minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
 	}
 
+	const sortArrayBy = (array, property, direction) => {
+		if (direction === "asc"){
+			return array.sort((a, b) => (a[property] > b[property]) ? 1 : -1);
+		} else {
+			return array.sort((a, b) => (a[property] > b[property]) ? -1 : 1);
+		}
+	}
+
 	return (
 		<table className="tracksWithAudioFeatures">
 			<thead>
@@ -23,7 +31,7 @@ const TracksTable = ({ tracksWithAudioFeatures }) => {
 				</tr>
 			</thead>
 			<tbody>
-				{tracksWithAudioFeatures.map((track, idx) => {
+				{sortArrayBy(tracksWithAudioFeatures, "duration_ms", "asc").map((track, idx) => {
 					return (
 						<tr key={idx}>
 							<td className="title">{track.name}</td>
