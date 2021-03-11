@@ -1,231 +1,313 @@
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-	display: block;
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
 }
 body {
-	line-height: 1;
+  line-height: 1;
 }
-ol, ul {
-	list-style: none;
+ol,
+ul {
+  list-style: none;
 }
-blockquote, q {
-	quotes: none;
+blockquote,
+q {
+  quotes: none;
 }
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
 }
 table {
-	border-collapse: collapse;
-	border-spacing: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 
 /* My CSS */
 :root {
-	--background-content: #ebebed;
-	--background-playlists: white;
-	--font-color: #75767e;
-	--font-color-pop: #3dc2a3f8;
-	--font-color-highlight: white;
-	--hightlight: #31233c;
-	--highlight-dark: #dd7755;
-	--table-divide: #e5e6ec;
-	--primary-button: #0f65ef;
+  --background-content: #ebebed;
+  --background-playlists: white;
+  --font-color: #75767e;
+  --font-color-pop: #3dc2a3f8;
+  --font-color-highlight: white;
+  --hightlight: #31233c;
+  --highlight-dark: #dd7755;
+  --table-divide: #e5e6ec;
+  --primary-button: #0f65ef;
 }
 
 html {
-	font-family: -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI,
+  font-family: -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI,
     Roboto, Helvetica Neue, sans-serif;
 }
 
 body {
-	color: var(--font-color);
+  color: var(--font-color);
 }
 
 h1 {
-	font-size: 1.75rem;
+  font-size: 1.75rem;
 }
 
 h2 {
-	font-size: 1.125rem;
+  font-size: 1.125rem;
 }
 
 h3 {
-	font-size: 1.125rem;
+  font-size: 1.125rem;
 }
 
 h4 {
-	font-size: 1rem;
+  font-size: 1rem;
 }
 
 h5 {
-	font-size: 0.875rem;
+  font-size: 0.875rem;
 }
 
 h6 {
-	font-size: 0.75rem;
+  font-size: 0.75rem;
 }
 
 .button {
-	text-decoration: none;
-	display: inline-block;
-	padding: .5rem .875rem;
-	font-size: 1rem;
-	line-height: 1.5rem;
-	border-radius: 3px;
-	text-align: center;
-	background-color: var(--primary-button);
-	color: #fff;
-	border: 1px solid transparent;
-	transition: background-color .1s ease 0s !important;
+  text-decoration: none;
+  display: inline-block;
+  padding: 0.5rem 0.875rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  border-radius: 3px;
+  text-align: center;
+  background-color: var(--primary-button);
+  color: #fff;
+  border: 1px solid transparent;
+  transition: background-color 0.1s ease 0s !important;
 }
 
 nav a {
-	text-decoration: none;
-	background-color: var(--hightlight);
-	color: var(--font-color-highlight);
-	padding: 0.5em 1em;
-	border-radius: 20px;
-	font-weight: 600;
-	transition: all .2s ease-in-out;
+  text-decoration: none;
+  background-color: var(--hightlight);
+  color: var(--font-color-highlight);
+  padding: 0.5em 1em;
+  border-radius: 20px;
+  font-weight: 600;
+  transition: all 0.2s ease-in-out;
 }
 
 nav a:hover {
-	background-color: var(--highlight-dark);
+  background-color: var(--highlight-dark);
 }
 
 .container {
-	display: flex;
-	height: 100vh;
-	justify-content: flex-start;
+  display: flex;
+  height: 100vh;
+  justify-content: flex-start;
 }
 
 .playlist-nav {
-	background-color: var(--background-playlists);
-	flex: 1;
-	font-weight: 700;
-	padding: 2em;
-	box-shadow: 10px 0 10px rgba(200, 200, 200, 0.4);
-	order: 0;
-	z-index: 3;
+  background-color: var(--background-playlists);
+  flex: 1;
+  font-weight: 700;
+  padding: 2em;
+  box-shadow: 10px 0 10px rgba(200, 200, 200, 0.4);
+  order: 0;
+  z-index: 3;
 }
 
 .playlist-nav h1 {
-	padding: 0.5em 0.3em;
-	letter-spacing: 0.1em;
+  padding: 0.5em 0.3em;
+  letter-spacing: 0.1em;
 }
 
 .playlist-nav li {
-	padding: 0.5em;
-	border-radius: 0 30px 30px 0;
-	line-height: 1.5em;
-	font-size: 0.8em;
-	color: rgb(165, 162, 162);
+  padding: 0.5em;
+  border-radius: 0 30px 30px 0;
+  line-height: 1.5em;
+  font-size: 0.8em;
+  color: rgb(165, 162, 162);
 }
 
 .highlighted {
-	color: var(--font-color-highlight) !important;
-	background-color: var(--font-color-pop);
-	box-shadow: 10px 10px 15px rgba(175, 175, 175, 0.4);
-	cursor: pointer;
+  color: var(--font-color-highlight) !important;
+  background-color: var(--font-color-pop);
+  box-shadow: 10px 10px 15px rgba(175, 175, 175, 0.4);
+  cursor: pointer;
 }
 
 .playlist-nav li:hover {
-	background-color: var(--hightlight);
-	cursor: pointer;
-	color: var(--font-color-highlight);
-	box-shadow: 10px 10px 15px rgba(175, 175, 175, 0.4);
+  background-color: var(--hightlight);
+  cursor: pointer;
+  color: var(--font-color-highlight);
+  box-shadow: 10px 10px 15px rgba(175, 175, 175, 0.4);
 }
 
 .content {
-	padding: 2.5em;
-	background-color: var(--background-content);
-	flex: 6;
-	display: flex;
-	flex-direction: column;
-	min-height: 0; /* For firefox */
+  padding: 2.5em;
+  background-color: var(--background-content);
+  flex: 6;
+  display: flex;
+  flex-direction: column;
+  min-height: 0; /* For firefox */
 }
 
 .main-nav {
-	display: flex;
-	justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .logo {
-	color: var(--hightlight);
+  color: var(--hightlight);
 }
 
 .tracks {
-	flex-grow: 1;
-	overflow: auto;
-	min-height: 0; /* For firefox */
+  flex-grow: 1;
+  overflow: auto;
+  min-height: 0; /* For firefox */
 }
 
 table {
-	width: 100%;
-	margin: 2em 0;
-	border-collapse: collapse;
+  width: 100%;
+  margin: 2em 0;
+  border-collapse: collapse;
 }
 
 thead {
-	text-align: left;
+  text-align: left;
 }
 
 tbody {
-	background-color: var(--background-playlists);
-	box-shadow: 10px 10px 15px rgba(175, 175, 175, 0.4);
-	border-radius: 15px;
+  background-color: var(--background-playlists);
+  box-shadow: 10px 10px 15px rgba(175, 175, 175, 0.4);
+  border-radius: 15px;
 }
 
 tr {
-	border-bottom: 2px var(--table-divide) solid;
+  border-bottom: 2px var(--table-divide) solid;
 }
 
 tr td {
-	vertical-align: middle;
+  vertical-align: middle;
 }
 
-td, th {
-	padding: 0.7em;
+td,
+th {
+  padding: 0.7em;
 }
 
 .number {
-	text-align: right;
+  text-align: right;
 }
 .title {
-	color: var(--font-color-pop);
-	font-weight: 600;
+  color: var(--font-color-pop);
+  font-weight: 600;
 }
 
 .loading-gif {
-	width: 32px;
-	margin: 0 auto;
+  width: 32px;
+  margin: 0 auto;
 }
 
 .primary-btn {
-	background-color: var(--primary-btn);
-	padding: 1em;
-	color: var(--font-color);
+  background-color: var(--primary-btn);
+  padding: 1em;
+  color: var(--font-color);
 }
